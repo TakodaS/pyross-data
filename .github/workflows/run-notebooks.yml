@@ -25,6 +25,7 @@ jobs:
                 python -m pip install pandas
                 python -m pip install numpy
                 python -m pip install -q tabula-py
+                python -m pip install jupyter_client
                 python -m pip install nbconvert
 
 
