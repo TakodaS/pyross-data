@@ -19,7 +19,7 @@ jobs:
                 pip install pandas
                 pip install numpy
                 pip install -q tabula-py
-		pip install nbconvert
+                pip install nbconvert
 
 
       - name: run-notebooks
