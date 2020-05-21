@@ -1,0 +1,38 @@
+name: Run Notebooks
+
+on: push
+      #schedule:
+      # 4am daily
+      #- cron:  '0 0 * * *'
+
+jobs:
+
+  build-and-test:
+    name: run-notebooks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: make-env
+        shell: bash -l {0}
+        run: |
+                pip install pandas
+                pip install numpy
+                pip install -q tabula-py
+
+
+      - name: run-notebooks
+        shell: bash -l {0}
+        run: |
+                python notebook-run --path notebooks/
+
+      - name: push-data
+        shell: bash -l {0}
+        run: |
+                git add data/*.csv
+                dt=$(date)
+                git commit -m "Automatic fetch on $dt"
+                git push
+
+
+    
