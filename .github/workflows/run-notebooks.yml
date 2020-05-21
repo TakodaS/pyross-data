@@ -13,13 +13,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+          architecture: x64
+
       - name: make-env
         shell: bash -l {0}
         run: |
-                pip install pandas
-                pip install numpy
-                pip install -q tabula-py
-                pip install nbconvert
+                python -m pip install pandas
+                python -m pip install numpy
+                python -m pip install -q tabula-py
+                python -m pip install nbconvert
 
 
       - name: run-notebooks
