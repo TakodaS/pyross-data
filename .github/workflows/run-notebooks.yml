@@ -24,7 +24,7 @@ jobs:
       - name: run-notebooks
         shell: bash -l {0}
         run: |
-                python notebook-run --path notebooks/
+                python notebook_run.py --path notebooks/
 
       - name: push-data
         shell: bash -l {0}
