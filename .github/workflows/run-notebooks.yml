@@ -31,9 +31,8 @@ jobs:
       - name: run-notebooks
         shell: bash -l {0}
         run: |
-                python notebook_run.py --path notebooks/
-
-      - name: push-data
+                find notebooks/*.ipynb -exec jupyter nbconvert --execute denmark_data_by_age.ipynb --ExecutePreprocessor.timeout=0 {} \;
+      - name: push-to-repo  
         shell: bash -l {0}
         run: |
                 git add data/*.csv
