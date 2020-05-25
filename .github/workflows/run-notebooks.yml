@@ -39,6 +39,6 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: denmark_data
-          path: denmark_data.csv
+          path: /notebooks/denmark_data.csv
 
     
