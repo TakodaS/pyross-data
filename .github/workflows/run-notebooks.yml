@@ -35,13 +35,10 @@ jobs:
         shell: bash -l {0}
         run: |
                 find notebooks/*.ipynb -exec jupyter nbconvert --execute denmark_data_by_age.ipynb --ExecutePreprocessor.timeout=0 {} \;
-      - name: push-to-repo  
-        shell: bash -l {0}
-        run: |
-                git add data/*.csv
-                dt=$(date)
-                git commit -m "Automatic fetch on $dt"
-                git push
-
+      - name: upload-artifact  
+        uses: actions/upload-artifact@v1
+        with:
+          name: denmark_data
+          path: denmark_data.csv
 
     
