@@ -47,6 +47,8 @@ jobs:
       - name: upload-data  
         shell: bash -l {0}
         run: |
+            git config --global user.name "data retrieval"
+            git config --global user.email "action@github"
             echo helloworld
             touch helloworld.txt
             git add helloworld.txt
