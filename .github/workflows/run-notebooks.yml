@@ -46,6 +46,7 @@ jobs:
       - name: upload-data  
         shell: bash -l {0}
         run: |
+            echo helloworld
             touch helloworld.txt
             git add helloworld.txt
             git commit -m "helloworld"
