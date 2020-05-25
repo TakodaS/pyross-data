@@ -19,26 +19,40 @@ jobs:
           python-version: 3.8
           architecture: x64
 
-      - name: make-env
-        shell: bash -l {0}
-        run: |
-                python -m pip install pandas
-                python -m pip install numpy
-                python -m pip install -q tabula-py
-                python -m pip install ipykernel
-                python -m ipykernel install --user
-                python -m pip install jupyter_client
-                python -m pip install nbconvert
+      # - name: make-env
+      #   shell: bash -l {0}
+      #   run: |
+      #           python -m pip install pandas
+      #           python -m pip install numpy
+      #           python -m pip install -q tabula-py
+      #           python -m pip install ipykernel
+      #           python -m ipykernel install --user
+      #           python -m pip install jupyter_client
+      #           python -m pip install nbconvert
 
 
-      - name: run-notebooks
-        shell: bash -l {0}
-        run: |
-                find notebooks/*.ipynb -exec jupyter nbconvert --execute denmark_data_by_age.ipynb --ExecutePreprocessor.timeout=0 {} \;
-      - name: upload-artifact  
-        uses: actions/upload-artifact@v1
+      # - name: run-notebooks
+      #   shell: bash -l {0}
+      #   run: |
+      #           find notebooks/*.ipynb -exec jupyter nbconvert --execute denmark_data_by_age.ipynb --ExecutePreprocessor.timeout=0 {} \;
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-          name: denmark_data
-          path: notebooks/denmark_data.csv
+        key: ${{ secrets.SSH_KEY }}
+        # name: id_rsa # optional
+        # known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        # config: ${{ secrets.CONFIG }} # ssh_config; optional
+      
+      - name: upload-data  
+        shell: bash -l {0}
+        run: |
+            touch helloworld.txt
+            git add helloworld.txt
+            git commit -m "helloworld"
+            git push
+        # uses: actions/upload-artifact@v1
+        # with:
+        #   name: denmark_data
+        #   path: notebooks/denmark_data.csv
 
     
